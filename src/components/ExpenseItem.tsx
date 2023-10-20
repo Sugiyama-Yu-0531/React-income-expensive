@@ -1,3 +1,13 @@
+import { Divider } from "@mui/material"
+
+export const deleteButtonStyle = {
+  borderRadius: '50%',
+  padding: '0',
+  width: '24px',
+  height: '24px',
+  border: '1px solid',
+  marginLeft: '8px'
+}
 
 type ExpenseItemProps = {
   deleteExpense: (id: any) => void
@@ -10,33 +20,21 @@ type ExpenseItemProps = {
 
 const ExpenseItem = (props: ExpenseItemProps) => {
   const deleteHandler = () => {
-    console.log('delete');
-    
     props.deleteExpense(props.expenseItem.docId);
-  }
-
-  const showThisMonth = () => {
-    return (
-      <li>
-      <div>{props.expenseText}</div>
-      <div>+{Number(props.expenseAmount).toLocaleString()}円</div>
-      <button onClick={deleteHandler}>×</button>
-      </li>
-    )
-  }
-
-  const showPastMonth = () => {
-    return (
-      <li>
-      <div>{props.expenseText}</div>
-      <div>+{Number(props.expenseAmount).toLocaleString()}円</div>
-      </li>
-    )
   }
 
   return (
     <>
-      {props.thisMonth === props.selectedMonth ? showThisMonth() : showPastMonth()}
+      <li style={{listStyle: 'none', display: 'flex', justifyContent: 'space-between'}}>
+        <div>{props.expenseText}</div>
+        <div style={{display: 'flex'}}>
+          <div>-{Number(props.expenseAmount).toLocaleString()}円</div>
+          {props.thisMonth === props.selectedMonth && (
+            <button onClick={deleteHandler} style={deleteButtonStyle}>×</button>
+          )}
+        </div>
+      </li>
+      <Divider sx={{mt: 0.5, mb: 1}} />
     </>
   )
 }

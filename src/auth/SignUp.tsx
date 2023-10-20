@@ -3,7 +3,7 @@ import { auth } from "@/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import Button from "@mui/material/Button";
-import { styled } from "@mui/material";
+import { Grid, styled } from "@mui/material";
 import { AuthContext } from "./AuthProvider";
 
 const SignUpButton = styled(Button)({
@@ -12,8 +12,7 @@ const SignUpButton = styled(Button)({
   border: 0,
   borderRadius: 3,
   color: 'white',
-  padding: '10px 40px',
-  marginTop: '30px',
+  margin: '12px auto 0',
   '&:hover': {
     backgroundColor: '#ee3e52',
   },
@@ -39,31 +38,60 @@ const SignUp = () => {
   };
 
   return (
-    <div>
-      <h1>新規登録</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>メールアドレス</label>
-          <input
-            name="email"
-            type="email"
-            placeholder="email@gmail.com"
-            onChange={(e) => setEmail(e.currentTarget.value)}
-          />
-        </div>
-        <div>
-          <label>パスワード</label>
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={(e) => setPassword(e.currentTarget.value)}
-          />
-        </div>
+    <Grid
+      container
+      flexDirection='column'
+      alignItems='center'
+      sx={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translateX(-50%) translateY(-50%)',
+        width: '360px',
+        p: 1.5,
+        backgroundColor: '#fff3e0',
+      }}
+    >
+      <Grid item>
+        <h1 style={{fontSize: '32px'}}>新規登録</h1>
+      </Grid>
+      <Grid item sx={{pt: 1.5}}>
+        <form onSubmit={handleSubmit}>
+          <Grid container flexDirection='column'>
+            <Grid item sx={{lineHeight: '1'}}>
+              <label style={{fontSize: '14px'}}>メールアドレス</label>
+            </Grid>
+            <Grid item>
+              <input
+                name="email"
+                type="email"
+                placeholder="email@gmail.com"
+                onChange={(e) => setEmail(e.currentTarget.value)}
+                style={{height: '28px', width: '100%'}}
+              />
+            </Grid>
+          </Grid>
+          <Grid container flexDirection='column'>
+            <Grid item sx={{lineHeight: '1'}}>
+              <label style={{fontSize: '14px'}}>パスワード</label>
+            </Grid>
+            <Grid item>
+              <input
+                name="password"
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.currentTarget.value)}
+                style={{height: '28px', width: '100%'}}
+              />
+            </Grid>
+          </Grid>
           <SignUpButton type="submit">SIGN UP</SignUpButton>
-      </form>
-      <Link to="/login">SignInへ戻る</Link>
-    </div>
+        </form>
+      </Grid>
+      <Grid item>
+        <Link to="/login">Loginへ戻る</Link>
+      </Grid>
+    </Grid>
   )
 }
 

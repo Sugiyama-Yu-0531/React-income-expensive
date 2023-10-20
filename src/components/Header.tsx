@@ -1,5 +1,5 @@
 import { auth } from "@/firebase";
-import { Button, styled } from "@mui/material";
+import { Button, Grid, styled } from "@mui/material";
 import { signOut } from "firebase/auth";
 
 const SignOutButton = styled(Button)({
@@ -29,14 +29,20 @@ const Header = (props: HeaderProps) => {
   const month = today.getMonth()+1;
 
   return (
-    <div className="head">
+    <>
       <SignOutButton onClick={() => signOut(auth)}>Sign Out</SignOutButton>
-      <div>
-        <button onClick={() => props.setPrevMonth()}>←前月 </button>
-        <h1>{year}年{month}月</h1>
-        <button onClick={() => props.setNextMonth()}> 次月→</button>
-      </div>
-    </div>
+      <Grid container alignItems='center' justifyContent='center' sx={{pt: 2}}>
+        <Grid item>
+          <button onClick={() => props.setPrevMonth()}>←前月 </button>
+        </Grid>
+        <Grid item sx={{px: 2}}>
+          <h1 style={{fontSize: '28px'}}>{year}年{month}月</h1>
+        </Grid>
+        <Grid item>
+          <button onClick={() => props.setNextMonth()}> 次月→</button>
+        </Grid>
+      </Grid>
+    </>
   )
 }
 

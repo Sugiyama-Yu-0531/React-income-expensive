@@ -1,3 +1,5 @@
+import { Divider } from "@mui/material"
+import { deleteButtonStyle } from "./ExpenseItem"
 
 type IncomeItemProps = {
   deleteIncome: (id: any) => void
@@ -13,28 +15,18 @@ const IncomeItem = (props: IncomeItemProps) => {
     props.deleteIncome(props.incomeItem.docId);
   }
 
-  const showThisMonth = () => {
-    return (
-      <li>
-      <div>{props.incomeText}</div>
-      <div>+{Number(props.incomeAmount).toLocaleString()}円</div>
-      <button onClick={deleteHandler}>×</button>
-      </li>
-    )
-  }
-
-  const showPastMonth = () => {
-    return (
-      <li>
-      <div>{props.incomeText}</div>
-      <div>+{Number(props.incomeAmount).toLocaleString()}円</div>
-      </li>
-    )
-  }
-
   return (
     <>
-      {props.thisMonth === props.selectedMonth ? showThisMonth() : showPastMonth()}
+      <li style={{listStyle: 'none', display: 'flex', justifyContent: 'space-between'}}>
+      <div>{props.incomeText}</div>
+      <div style={{display: 'flex'}}>
+        <div>+{Number(props.incomeAmount).toLocaleString()}円</div>
+        {props.thisMonth === props.selectedMonth && (
+          <button onClick={deleteHandler} style={deleteButtonStyle}>×</button>
+        )}
+      </div>
+      </li>
+      <Divider sx={{mt: 0.5, mb: 1}} />
     </>
   )
 }

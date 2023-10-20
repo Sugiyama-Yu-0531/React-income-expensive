@@ -171,8 +171,8 @@ const Home = () => {
   }, [date]);
 
   return (
-    <div className="container">
-      <div className="top">
+    <>
+      <div style={{position: 'sticky', top: 0, backgroundColor: '#ffe0b2'}}>
         <Header
           date={date}
           setPrevMonth={setPrevMonth}
@@ -186,19 +186,19 @@ const Home = () => {
           incomeTotal={incomeTotal}
           expenseItems={expenseItems}
         />
+        <AddItem
+          addIncome={addIncome}
+          addExpense={addExpense}
+          inputText={inputText}
+          setInputText={setInputText}
+          inputAmount={inputAmount}
+          setInputAmount={setInputAmount}
+          type={type}
+          setType={setType}
+          selectedMonth={selectedMonth}
+          thisMonth={thisMonth}
+        />
       </div>
-      <AddItem
-        addIncome={addIncome}
-        addExpense={addExpense}
-        inputText={inputText}
-        setInputText={setInputText}
-        inputAmount={inputAmount}
-        setInputAmount={setInputAmount}
-        type={type}
-        setType={setType}
-        selectedMonth={selectedMonth}
-        thisMonth={thisMonth}
-      />
       <ItemsList
         deleteIncome={deleteIncome}
         deleteExpense={deleteExpense}
@@ -208,7 +208,7 @@ const Home = () => {
         selectedMonth={selectedMonth}
         thisMonth={thisMonth}
       />
-    </div>
+    </>
   )
 }
 

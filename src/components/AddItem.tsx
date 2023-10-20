@@ -1,5 +1,5 @@
 
-import { Button, styled } from '@mui/material';
+import { Button, Grid, styled } from '@mui/material';
 import React from 'react';
 
 const AddButton = styled(Button)({
@@ -7,11 +7,10 @@ const AddButton = styled(Button)({
   border: 0,
   borderRadius: 3,
   color: 'white',
-  height: 48,
-  width: '250px',
+  height: '34px',
   textAlign: 'center',
-  fontSize: '1.8rem',
-  margin: '10px 0 20px 0',
+  fontSize: '16px',
+  margin: '12px 0 0 0',
   '&:hover': {
     backgroundColor: '#3fb8e7',
   },
@@ -57,22 +56,53 @@ const AddItem = (props: AddItemProps) => {
   const thisMonthForm = () => {
     return (
       <form>
-        <select onChange={(e) => props.setType(e.target.value)}>
-          <option value="inc">+</option>
-          <option value="exp">-</option>
-        </select>
-        <div>
-          <label>内容</label>
-          <input type="text" value={props.inputText} onChange={(e) => props.setInputText(e.target.value)}/>
-        </div>
-        <div>
-          <label>金額</label>
-          <input type="number" value={props.inputAmount} onChange={(e) => props.setInputAmount(parseInt(e.target.value))}/>
-          <div>円</div>
-        </div>
-        <div>
-        <AddButton type="submit" onClick={submitItemHandler}>追加</AddButton>
-        </div>
+        <Grid
+          container
+          alignItems='end'
+          justifyContent='center'
+          sx={{pb: 1.5}}
+        >
+          <Grid item>
+            <select onChange={(e) => props.setType(e.target.value)} style={{height: '34px'}}>
+              <option value="inc">+</option>
+              <option value="exp">-</option>
+            </select>
+          </Grid>
+          <Grid item sx={{pl: 1}}>
+            <Grid container flexDirection='column'>
+              <Grid item sx={{lineHeight: '1'}}>
+                <label style={{fontSize: '14px'}}>内容</label>
+              </Grid>
+              <Grid>
+                <input
+                  type="text"
+                  value={props.inputText}
+                  onChange={(e) => props.setInputText(e.target.value)}
+                  style={{height: '28px'}}
+                />
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item sx={{pl: 1}}>
+            <Grid container flexDirection='column'>
+              <Grid item sx={{lineHeight: '1'}}>
+                <label style={{fontSize: '14px'}}>金額</label>
+              </Grid>
+              <Grid item sx={{display: 'flex', alignItems: 'end'}}>
+                <input
+                  type="number"
+                  value={props.inputAmount}
+                  onChange={(e) => props.setInputAmount(parseInt(e.target.value))}
+                  style={{height: '28px', textAlign: 'right', width: '90px'}}
+                />
+                <div>円</div>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item sx={{pl: 1}}>
+            <AddButton type="submit" onClick={submitItemHandler}>追加</AddButton>
+          </Grid>
+        </Grid>
       </form>
     )
   }
